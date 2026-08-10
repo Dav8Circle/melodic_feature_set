@@ -1,6 +1,6 @@
 NOTICE
 
-This software contains code from multiple sources with different licenses.
+This software contains code and data from multiple sources with different licenses.
 
 ================================================================================
 Apache License 2.0 Components
@@ -12,10 +12,38 @@ and are licensed under the Apache License 2.0:
     src/melody_features/tonal_tension.py
     src/melody_features/pitch_spelling.py
 
-Copyright 2022, Maarten Grachten, Carlos Cancino-Chacón, Silvan Peter, 
+Copyright 2022, Maarten Grachten, Carlos Cancino-Chacón, Silvan Peter,
 Emmanouil Karystinaios, Francesco Foscarin
 
 See LICENSE-APACHE for the full Apache License 2.0.
+
+================================================================================
+CC BY-SA 4.0 Components
+================================================================================
+
+The bundled Essen Folksong Collection MIDI files are redistributed under the
+Creative Commons Attribution-ShareAlike 4.0 International License
+(https://creativecommons.org/licenses/by-sa/4.0/):
+
+    src/melody_features/corpora/essen_folksong_collection/*
+
+These files are taken from Sebastian Eck's MIDI conversion of the Essen
+Folksong Collection:
+
+    Eck, Sebastian. Essen Folksong Database (Conversion & Tokenization).
+    Kaggle dataset.
+    https://www.kaggle.com/datasets/sebastianeck/essen-folksong-database-conversion-and-tokenization
+
+The underlying folksong encodings originate from the Essen Folksong Collection
+(EsAC / Humdrum **kern), compiled under the supervision of Helmut Schaffrath
+and prepared in kern format by David Huron:
+
+    Schaffrath, Helmut. The Essen Folksong Collection in Kern Format
+    [computer database]. D. Huron (ed.). Menlo Park, CA: Center for Computer
+    Assisted Research in the Humanities, 1995.
+
+If you redistribute or adapt this corpus (or works derived from it), you must
+retain attribution and share alike under CC BY-SA 4.0.
 
 ================================================================================
 MIT License Components
@@ -28,4 +56,3 @@ Copyright (c) 2025 David Mark Whyatt
 See LICENSE-MIT for the full MIT License.
 
 ================================================================================
-

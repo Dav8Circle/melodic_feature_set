@@ -1,21 +1,21 @@
 # Melody-Features
 
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://github.com/codespaces/new?hide_repo_select=true&ref=main&repo=1023590972)
+[Open in GitHub Codespaces](https://github.com/codespaces/new?hide_repo_select=true&ref=main&repo=1023590972)
 
-[![DOI](https://zenodo.org/badge/1023590972.svg)](https://doi.org/10.5281/zenodo.16894207)
+[DOI](https://doi.org/10.5281/zenodo.16894207)
 
-[![Tests](https://github.com/dmwhyatt/melody-features/workflows/Tests/badge.svg)](https://github.com/dmwhyatt/melody-features/actions)
+[Tests](https://github.com/dmwhyatt/melody-features/actions)
 
-[![Coverage](https://codecov.io/gh/dmwhyatt/melody-features/branch/main/graph/badge.svg)](https://codecov.io/gh/dmwhyatt/melody-features)
+[Coverage](https://codecov.io/gh/dmwhyatt/melody-features)
 
 ## Overview
+
 This is a Python package designed to facilitate the use of many different melody analysis tools. 
 
 The main goal of this package is to consolidate a wide range of features from the computational melody analysis literature
 into a single place, in a single language.
 
 This package is strictly for monophonic melodies - it will not compute any features for polyphonic music!
-
 
 ## Included Contributions
 
@@ -30,6 +30,8 @@ Included in the package are contributions from:
 - **MUST** (Clemente et al., 2020)
 - **Partitura** (Cancino-Chacón, 2022)
 
+
+
 ## Melody Features Summary
 
 This package provides over **200 features** from various computational melody analysis frameworks. For a comprehensive, interactive table with search and sorting capabilities, refer to:
@@ -37,9 +39,12 @@ This package provides over **200 features** from various computational melody an
 **[Interactive Features Table](https://dmwhyatt.github.io/melody-features/)**
 
 The interactive table allows you to:
+
 - **Search** features by name, implementation, or description
 - **Sort** by any column (Name, Implementation, Type, etc.)
 - **Browse** all features with detailed descriptions and references
+
+
 
 ## Installation
 
@@ -55,6 +60,8 @@ cd melody-features
 # Install in development mode
 pip install -e .
 ```
+
+
 
 ## Quick Start
 
@@ -73,7 +80,6 @@ print(results.iloc[:1,].to_json(indent=4, orient="records"))
 ```
 
 By default, this function will produce a Pandas DataFrame containing the tabulated features, using the a collection of 903 Western traditional music melodies as the reference corpus, from Pearce (2006).
-
 
 This function can be customised in a number of ways, please see `notebooks/example.ipynb` for a detailed breakdown.
 
@@ -107,6 +113,8 @@ long_results = to_long_format(wide_results)
 metadata = get_feature_metadata()  # feature_name, family, source, domain, type, description, notes, references
 ```
 
+
+
 ## Loading melodies and computing individual features
 
 Besides the batch pipeline, you can load a `Melody` and call feature functions from the package root. Use `list_available_features()` to browse the full catalogue.
@@ -125,7 +133,7 @@ Some features (FANTASTIC corpus statistics, IDyOM) need extra configuration or r
 
 ## Melsim
 
-Melsim is an R package for computing the similarity between two or more melodies. It is currently under development by Seb Silas and Klaus Frieler (https://github.com/sebsilas/melsim)
+Melsim is an R package for computing the similarity between two or more melodies. It is currently under development by Seb Silas and Klaus Frieler ([https://github.com/sebsilas/melsim](https://github.com/sebsilas/melsim))
 
 It is included with this feature set through a wrapper approach - take a look at example.py and the supplied MIDI files.
 
@@ -133,9 +141,16 @@ Since calculating similarities is highly modular in Melsim, we leave the user to
 
 ### Available Corpora
 
-The package comes with two example corpora: a MIDI conversion of the well-known Essen Folksong Collection (Eck, 2024; Schaffrath, 1995), and 903 Western musical tradition melodies, used by Pearce for IDyOM pretraining (Pearce, 2006). By default, the 903-melody corpus is invoked by `get_all_features`. 
+The package ships with two example corpora:
+
+- A MIDI conversion of the Essen Folksong Collection (Eck, 2024; Schaffrath, 1995), redistributed under [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) — see [License](#license) for more information.
+- 903 Western traditional melodies used by Pearce for IDyOM pretraining (Pearce, 2006)
+
+By default, the 903-melody corpus is used as the reference corpus by `get_all_features`.
 
 ## Development
+
+
 
 ### Running Tests
 
@@ -152,6 +167,8 @@ python -m pytest tests/test_corpus_import.py -v
 python -m pytest tests/test_idyom_setup.py -v
 ```
 
+
+
 ## Contributing
 
 If you spot something you think ought to be included here, feel free to contribute it!
@@ -161,13 +178,24 @@ you may propose them in a single PR, otherwise, please submit separate PRs for e
 as this makes it simpler to review the code.
 
 Presently, we don't use a formalised style guide. However, we expect that your code will adhere to the following principles:
+
 - Each module should always include a docstring that succintly explains the purpose of the module
 - Each function within a module should have its own docstring and type hints. The docstring should include a citation to the relevant literature resource
 - Each top-level feature should return using a native Python type
 - New features should be accompanied by tests. Where it is possible, implemented features should be validated against their source implementation: see [tests/test_jsymbolic_validation.py](tests/test_jsymbolic_validation.py) for an example.
 
+
+
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE-MIT](LICENSE-MIT) file for details.
+This project uses multiple licenses. Full attribution is in [NOTICE](NOTICE).
 
-Open-source code adapted from the Partitura Python package is licensed under the Apache-2.0 license, which can be found in the [LICENSE-APACHE](LICENSE-APACHE) file. More details can be found in [NOTICE](NOTICE).
+
+| Component                                                                                         | License                                                         | Details                                                                                                                                                                                        |
+| ------------------------------------------------------------------------------------------------- | --------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Package source code (default)                                                                     | [MIT](LICENSE-MIT)                                              | Copyright (c) 2025 David Mark Whyatt                                                                                                                                                           |
+| Code adapted from Partitura                                                                       | [Apache-2.0](LICENSE-APACHE)                                    | `tonal_tension.py`, `pitch_spelling.py`                                                                                                                                                        |
+| Bundled Essen Folksong Collection MIDI (`src/melody_features/corpora/essen_folksong_collection/`) | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) | From [Eck's MIDI conversion](https://www.kaggle.com/datasets/sebastianeck/essen-folksong-database-conversion-and-tokenization) of the Essen Folksong Collection (Schaffrath, 1995; Huron, ed.) |
+
+
+The Essen corpus remains under CC BY-SA 4.0 when redistributed or adapted: retain attribution and share alike. It is not covered by the MIT license that applies to the rest of the package.
