@@ -30,11 +30,8 @@ class InterpolationContour:
         times : list[float]
             Array of onset times in seconds
         method : str, optional
-            Method to use for contour calculation, either "fantastic" or "amads".
-            Defaults to "amads" because this improves robustness for short melodies.
-            The FANTASTIC method is the original implementation, and identifies turning points
-            using contour extrema via a series of rules. The AMADS method instead identifies
-            reversals for all melody lengths.
+            Method to use for contour calculation, either `"fantastic"` or `"amads"`.
+            Defaults to `"amads"`.
 
         Raises
         ------
@@ -266,10 +263,13 @@ class InterpolationContour:
             `1` if the summed gradients are positive, `0` if the sum is zero,
             and `-1` if the summed gradients are negative.
 
-        Notes
-        -----
+        Note
+        ----
         This is a net direction metric. Opposing upward and downward sections can
-        cancel, resulting in `0` even when the contour is not flat.
+        cancel, resulting in `0` even when the contour is not flat. Defaults to the
+        `"amads"` turning-point method (reversals), which is more robust for short
+        melodies than the original FANTASTIC contour-extrema rules. Pass
+        `method="fantastic"` for the original behaviour.
 
         Examples
         --------
@@ -305,6 +305,12 @@ class InterpolationContour:
         float
             Mean absolute interpolation-contour gradient.
 
+        Note
+        ----
+        Defaults to the `"amads"` turning-point method (reversals), which is more
+        robust for short melodies than the original FANTASTIC contour-extrema rules.
+        Pass `method="fantastic"` for the original behaviour.
+
         Examples
         --------
         Steps of 2 semitones per second
@@ -332,6 +338,12 @@ class InterpolationContour:
         -------
         float
             Sample standard deviation of the gradient values.
+
+        Note
+        ----
+        Defaults to the `"amads"` turning-point method (reversals), which is more
+        robust for short melodies than the original FANTASTIC contour-extrema rules.
+        Pass `method="fantastic"` for the original behaviour.
 
         Examples
         --------
@@ -375,6 +387,12 @@ class InterpolationContour:
             The number of sign-reversing transitions divided by the number of
             transitions between distinct interpolation-gradient runs. Returns
             `0.0` when there are no transitions between distinct gradient runs.
+
+        Note
+        ----
+        Defaults to the `"amads"` turning-point method (reversals), which is more
+        robust for short melodies than the original FANTASTIC contour-extrema rules.
+        Pass `method="fantastic"` for the original behaviour.
 
         Examples
         --------
@@ -431,10 +449,13 @@ class InterpolationContour:
             `"e"`. Each character gives the gradient category at one sampled
             position in the interpolation contour.
 
-        Notes
-        -----
+        Note
+        ----
         Returned labels are letters (`"a"`-`"e"`). Numeric codes (`-2` to
         `2`) are threshold descriptions only and are not returned by this property.
+        Defaults to the `"amads"` turning-point method (reversals), which is more
+        robust for short melodies than the original FANTASTIC contour-extrema rules.
+        Pass `method="fantastic"` for the original behaviour.
 
         Examples
         --------

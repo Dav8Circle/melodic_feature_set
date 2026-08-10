@@ -85,10 +85,9 @@ def get_interpolation_contour_features(
 
     An interpolation contour approximates melodic shape by identifying contour
     turning points and replacing the pitch trajectory between successive turning
-    points with linear gradients. This function uses the AMADS turning-point method
-    by default, then summarizes the gradient sequence by overall direction, mean
-    absolute gradient, gradient variability, direction-change rate, and a four-letter
-    contour class.
+    points with linear gradients. The returned features summarize the gradient
+    sequence by overall direction, mean absolute gradient, gradient variability,
+    direction-change rate, and a four-letter contour class.
 
     Parameters
     ----------

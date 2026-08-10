@@ -1,6 +1,5 @@
 """Calculates the Step Contour of a melody, along with related features.
 
-Supports both the original FANTASTIC behaviour and an AMADS default variant.
 Exemplified in Steinbeck (1982) [2], Juhász (2000) [3], Eerola and Toiviainen (2004) [4].
 """
 
@@ -56,9 +55,8 @@ class StepContour:
         step_contour_length : int, optional
             Length of the output step contour vector (default is 64)
         method : str, optional
-            Method for contour statistics, either "amads" or "fantastic".
-            Defaults to "amads". "fantastic" keeps parity with the original
-            FANTASTIC implementation where applicable.
+            Method for contour statistics, either `"amads"` or `"fantastic"`.
+            Defaults to `"amads"`.
 
         References
         ----------
@@ -207,14 +205,18 @@ class StepContour:
         pitch is repeated in proportion to its duration. This feature is the
         standard deviation of that vector, so long notes influence the result more
         than short notes. Larger values indicate a wider duration-weighted pitch
-        spread. The `"amads"` method uses population standard deviation
-        (`ddof=0`), while `"fantastic"` uses sample standard deviation
-        (`ddof=1`) for compatibility with the original FANTASTIC convention.
+        spread.
 
         Returns
         -------
         float
             Standard deviation of the duration-weighted step-contour pitch vector.
+
+        Note
+        ----
+        The `"amads"` method uses population standard deviation (`ddof=0`), while
+        `"fantastic"` uses sample standard deviation (`ddof=1`) for compatibility
+        with the original FANTASTIC convention.
 
         Examples
         --------

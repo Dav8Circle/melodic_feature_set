@@ -486,7 +486,12 @@ def collect_feature_rows(objs: Iterable[tuple[str, object]]) -> list[FeatureRow]
         doc_string = inspect.getdoc(obj.fget) if is_property else inspect.getdoc(obj)
         sections = extract_sections_from_docstring(doc_string or "")
         description = normalize_feature_text(" ".join(sections.get("Preamble", "").split()))
-        doc_notes = normalize_feature_text(" ".join(sections.get("Note", "").split()))
+        note_parts = [
+            sections[key]
+            for key in ("Note", "Notes")
+            if sections.get(key)
+        ]
+        doc_notes = normalize_feature_text(" ".join(" ".join(note_parts).split()))
         feature_python_name = name.split(".", 1)[-1] if "." in name else name
         notes = _notes_for_feature(feature_python_name, doc_notes)
 
