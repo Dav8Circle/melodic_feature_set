@@ -3,7 +3,7 @@
 [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://github.com/codespaces/new?hide_repo_select=true&ref=main&repo=1023590972)
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.16894207.svg)](https://doi.org/10.5281/zenodo.16894207)
 [![Tests](https://github.com/dmwhyatt/melody-features/actions/workflows/test.yml/badge.svg)](https://github.com/dmwhyatt/melody-features/actions)
-[![Coverage](https://codecov.io/gh/dmwhyatt/melody-features/branch/main/graph/badge.svg)](https://codecov.io/gh/dmwhyatt/melody-features)
+[![Coverage](https://codecov.io/gh/dmwhyatt/melody-features/graph/badge.svg)](https://codecov.io/gh/dmwhyatt/melody-features)
 
 ## Overview
 
