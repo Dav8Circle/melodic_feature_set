@@ -1,5 +1,7 @@
 """IDyOM configuration helpers."""
 
+from __future__ import annotations
+
 import os
 from dataclasses import dataclass
 from importlib import resources
@@ -104,10 +106,34 @@ def _validate_viewpoints(viewpoints: list[str], name: str) -> None:
 
 @dataclass
 class IDyOMConfig:
-    """Configuration class for IDyOM analysis."""
+    """Settings for a single IDyOM run.
 
-    target_viewpoints: list[str]
-    source_viewpoints: list[str]
+    Place one or more instances in the ``idyom`` dict of
+    :class:`~melody_features.Config` (dict keys label the runs in the output).
+    Each entry is executed separately.
+
+    Parameters
+    ----------
+    target_viewpoints :
+        Viewpoints to predict (e.g. ``["cpitch"]``). Entries are atomic
+        viewpoint name strings from ``VALID_VIEWPOINTS``.
+    source_viewpoints :
+        Conditioning viewpoints. Use strings for atomic viewpoints, and
+        **tuples** (parentheses) of two or more atoms for linked viewpoints,
+        e.g. ``[("cpint", "cpintfref"), "cpcint"]``. Strings and tuples may
+        be mixed in one list.
+    ppm_order :
+        PPM model order.
+    models :
+        ``":stm"``, ``":ltm"``, or ``":both"``.
+    corpus :
+        Optional pretraining corpus for long-term models. Must be ``None``
+        when ``models=":stm"``. If ``None`` for ``:ltm`` / ``:both``, the
+        parent :class:`~melody_features.Config` corpus is used when needed.
+    """
+
+    target_viewpoints: list[str | tuple[str, ...]]
+    source_viewpoints: list[str | tuple[str, ...]]
     ppm_order: int
     models: str
     corpus: Optional[os.PathLike] = None

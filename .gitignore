@@ -28,3 +28,7 @@ build.sh
 delete.sh
 /.quarto/
 **/*.quarto_ipynb
+
+# Sphinx
+docs/_build/
+docs/_autosummary/

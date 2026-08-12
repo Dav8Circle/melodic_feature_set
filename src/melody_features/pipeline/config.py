@@ -14,7 +14,27 @@ DEFAULT_MAX_NGRAM_ORDER = 5
 
 @dataclass
 class FantasticConfig:
-    """Configuration class for FANTASTIC analysis."""
+    """Settings for FANTASTIC-style features (tokenization and corpus n-grams).
+
+    These options apply to lexical-diversity / m-type features and to
+    corpus-relative FANTASTIC statistics computed by
+    :func:`~melody_features.get_all_features`.
+
+    Parameters
+    ----------
+    max_ngram_order :
+        Inclusive maximum n-gram / m-type length (must be ``>= 1``).
+        Features use orders ``1`` through this value (FANTASTIC default
+        range is 1–5).
+    phrase_gap :
+        Inter-onset interval threshold in quarter-note units (must be
+        ``> 0``). An IOI larger than this starts a new phrase when the
+        melody is segmented for tokenization.
+    corpus :
+        Optional MIDI directory for FANTASTIC corpus statistics. If
+        ``None``, the parent :class:`~melody_features.Config` corpus is
+        used. Independent of IDyOM pretraining corpora.
+    """
 
     max_ngram_order: int
     phrase_gap: float
@@ -49,7 +69,32 @@ class FantasticConfig:
 
 @dataclass
 class Config:
-    """Configuration class for the full feature set."""
+    """Configuration for :func:`~melody_features.get_all_features`.
+
+    Use ``Config`` to control corpus statistics, FANTASTIC settings, key
+    estimation, and IDyOM. The ``idyom`` field is a non-empty dictionary of
+    named :class:`~melody_features.IDyOMConfig` objects: **each entry runs
+    IDyOM once**, and the dict key labels that run in the output columns.
+    That lets you compare several IDyOM setups (models, viewpoints, corpora)
+    in a single feature-extraction call.
+
+    Parameters
+    ----------
+    idyom :
+        Mapping of run label → :class:`~melody_features.IDyOMConfig`.
+        Must contain at least one entry.
+    fantastic :
+        :class:`~melody_features.FantasticConfig` for corpus n-gram features.
+    corpus :
+        Optional default reference corpus path (FANTASTIC / IDyOM LTM).
+        Per-entry ``IDyOMConfig.corpus`` and ``FantasticConfig.corpus``
+        override this when set.
+    key_estimation :
+        ``"always_read_from_file"``, ``"infer_if_necessary"`` (default), or
+        ``"always_infer"``.
+    key_finding_algorithm :
+        Currently only ``"krumhansl_schmuckler"``.
+    """
 
     idyom: dict[str, IDyOMConfig]
     fantastic: FantasticConfig

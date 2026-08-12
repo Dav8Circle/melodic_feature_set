@@ -1,4 +1,4 @@
-# Melody-Features
+# *melody-features*
 
 [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://github.com/codespaces/new?hide_repo_select=true&ref=main&repo=1023590972)
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.16894207.svg)](https://doi.org/10.5281/zenodo.16894207)
@@ -31,13 +31,14 @@ Included in the package are contributions from:
 
 ## Melody Features Summary
 
-This package provides over **200 features** from various computational melody analysis frameworks. For a comprehensive, interactive table with search and sorting capabilities, refer to:
+This package provides over **200 features** from various computational melody analysis frameworks. For installation, usage, API reference, and a comprehensive interactive feature table with search and sorting, see the documentation:
 
-**[Interactive Features Table](https://dmwhyatt.github.io/melody-features/)**
+**[Documentation](https://dmwhyatt.github.io/melody-features/)** (feature catalogue: [Feature catalogue](https://dmwhyatt.github.io/melody-features/feature_catalogue.html))
 
-The interactive table allows you to:
+The interactive catalogue allows you to:
 
 - **Search** features by name, implementation, or description
+- **Filter** by domain, category, implementation, or type
 - **Sort** by any column (Name, Implementation, Type, etc.)
 - **Browse** all features with detailed descriptions and references
 
@@ -62,21 +63,21 @@ pip install -e .
 
 ## Quick Start
 
-The feature set can be easily accessed using the top-level function `get_all_features`. Here's a basic example:
+The feature set can be easily accessed using the top-level function `get_all_features`. These docs use the short import `import melody_features as mf`:
 
 ```python
-from melody_features import get_all_features
+import melody_features as mf
 
 # Extract features from a directory of MIDI files, a single MIDI file
 # or a list of paths to MIDI files
-results = get_all_features(input="path/to/your/midi/files")
+results = mf.get_all_features(input="path/to/your/midi/files")
 
 # Print the result of all feature calculations
 print(results.iloc[:1,].to_json(indent=4, orient="records"))
 
 ```
 
-By default, this function will produce a Pandas DataFrame containing the tabulated features, using the a collection of 903 Western traditional music melodies as the reference corpus, from Pearce (2006).
+By default, this function will produce a Pandas DataFrame containing the tabulated features, using the a collection of 903 Western traditional music melodies as the reference corpus, from Pearce (2018).
 
 This function can be customised in a number of ways, please see `notebooks/example.ipynb` for a detailed breakdown.
 
@@ -85,9 +86,9 @@ This function can be customised in a number of ways, please see `notebooks/examp
 By default `get_all_features` returns one row per melody, with one column per feature (`{family}.{feature_name}`, e.g. `absolute_pitch.pitch_range`). Pass `long_format=True` to instead get a tidy long-format DataFrame with one row per melody/feature combination.
 
 ```python
-from melody_features import get_all_features, get_feature_metadata, to_long_format
+import melody_features as mf
 
-long_results = get_all_features(input="path/to/your/midi/files", long_format=True)
+long_results = mf.get_all_features(input="path/to/your/midi/files", long_format=True)
 # columns: melody_num, melody_id, feature_name, family, source, domain, type, value, description, notes, references
 
 # e.g. keep only descriptor-type features from jSymbolic
@@ -104,10 +105,12 @@ By default, feature metadata (source, family, domain, type, description) is join
 You can also reshape an existing wide-format DataFrame (for example one you've already saved to CSV) with `to_long_format`, and fetch the metadata table on its own with `get_feature_metadata()`:
 
 ```python
-wide_results = get_all_features(input="path/to/your/midi/files")
-long_results = to_long_format(wide_results)
+import melody_features as mf
 
-metadata = get_feature_metadata()  # feature_name, family, source, domain, type, description, notes, references
+wide_results = mf.get_all_features(input="path/to/your/midi/files")
+long_results = mf.to_long_format(wide_results)
+
+metadata = mf.get_feature_metadata()  # feature_name, family, source, domain, type, description, notes, references
 ```
 
 
@@ -117,37 +120,40 @@ metadata = get_feature_metadata()  # feature_name, family, source, domain, type,
 Besides the batch pipeline, you can load a `Melody` and call feature functions from the package root. Use `list_available_features()` to browse the full catalogue.
 
 ```python
-from melody_features import pitch_range
-from melody_features.corpus import get_corpus_files
+import melody_features as mf
 from melody_features.io.midi import load_midi
 
-midi_path = get_corpus_files("essen", max_files=1)[0]
+midi_path = mf.get_corpus_files("essen", max_files=1)[0]
 melody = load_midi(str(midi_path))
-print(pitch_range(melody.pitches))
+print(mf.pitch_range(melody.pitches))
 ```
 
 Some features (FANTASTIC corpus statistics, IDyOM) need extra configuration or reference corpora; it is easiest to use `get_all_features` with `Config` when you need those.
 
 ## Melsim
 
-Melsim is an R package for computing the similarity between two or more melodies. It is currently under development by Seb Silas and Klaus Frieler ([https://github.com/sebsilas/melsim](https://github.com/sebsilas/melsim))
+Melsim is an R package for computing similarity between two or more melodies (Silas & Frieler; [melsim on GitHub](https://github.com/sebsilas/melsim)). *melody-features* includes a Python wrapper; see the [Melsim docs page](docs/melsim.rst) (or the built HTML site) for setup, measures, transformations, and examples.
 
-It is included with this feature set through a wrapper approach - take a look at example.py and the supplied MIDI files.
-
-Since calculating similarities is highly modular in Melsim, we leave the user to decide how they wish to construct comparisons. Melsim is not run as part of the `get_all_features` function.
+Melsim is **not** run as part of `get_all_features` — you choose which files, methods, and transformations to compare.
 
 ### Available Corpora
 
 The package ships with two example corpora:
 
 - A MIDI conversion of the Essen Folksong Collection (Eck, 2024; Schaffrath, 1995), redistributed under [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) — see [License](#license) for more information.
-- 903 Western traditional melodies used by Pearce for IDyOM pretraining (Pearce, 2006)
+- 903 Western traditional melodies used by Pearce for IDyOM pretraining (Pearce, 2018)
 
 By default, the 903-melody corpus is used as the reference corpus by `get_all_features`.
 
 ## Development
 
+### Building documentation
 
+```bash
+pip install -r docs/requirements.txt
+cd docs && make html
+# open docs/_build/html/index.html
+```
 
 ### Running Tests
 
@@ -168,18 +174,11 @@ python -m pytest tests/test_idyom_setup.py -v
 
 ## Contributing
 
-If you spot something you think ought to be included here, feel free to contribute it!
-Simply fork the repo, implement your feature, and submit a Pull Request that explains
-the proposed addition(s). If you seek to contribute features that relate to one another, 
-you may propose them in a single PR, otherwise, please submit separate PRs for each feature, 
-as this makes it simpler to review the code.
+Fork, implement, and open a PR (one feature per PR unless they belong together).
 
-Presently, we don't use a formalised style guide. However, we expect that your code will adhere to the following principles:
+New features must be **decorated** (source, type, domain) and imported in `features.py`, or `get_all_features()` will not collect them. Docstrings feed the Sphinx API and feature catalogue — keep them NumPy-style and cite literature where relevant.
 
-- Each module should always include a docstring that succintly explains the purpose of the module
-- Each function within a module should have its own docstring and type hints. The docstring should include a citation to the relevant literature resource
-- Each top-level feature should return using a native Python type
-- New features should be accompanied by tests. Where it is possible, implemented features should be validated against their source implementation: see [tests/test_jsymbolic_validation.py](tests/test_jsymbolic_validation.py) for an example.
+Details: [docs/contributing.rst](docs/contributing.rst). Add tests (see [tests/test_jsymbolic_validation.py](tests/test_jsymbolic_validation.py) for upstream validation) and prefer native Python return types.
 
 
 

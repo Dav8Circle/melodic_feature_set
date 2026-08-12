@@ -643,8 +643,8 @@ def rhythm_abruptness(melody: Melody) -> float:
     Duration accent follows the MIDI Toolbox `duraccent` defaults (`tau=0.5`,
     `accent_index=2.0`).
 
-    Citation
-    --------
+    References
+    ----------
     Parncutt (1994)
     """
     return must_algorithms.rhythm_abruptness(melody)
