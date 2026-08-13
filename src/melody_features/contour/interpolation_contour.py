@@ -14,7 +14,7 @@ class InterpolationContour:
     """Class for calculating and analyzing the interpolation contours of melodies, according to
     Müllensiefen (2009) [1]. This representation was first formalised by Steinbeck (1982)
     [2], and informed a variant of the present implementation in Müllensiefen & Frieler
-    (2004) [3].
+    (2006) [3].
     An interpolation contour is produced by first identifying turning points in the melody,
     and then interpolating a linear gradient between each turning point. The resulting list
     of values represents the gradient of the melody at evenly spaced points in time.
@@ -69,9 +69,8 @@ class InterpolationContour:
         ----------
         [1] Müllensiefen, D. (2009). Fantastic: Feature ANalysis Technology Accessing
         STatistics (In a Corpus): Technical Report v1.5
-        [2] W. Steinbeck, Struktur und Ähnlichkeit: Methoden automatisierter
-            Melodieanalyse. Bärenreiter, 1982.
-        [3] Müllensiefen, D. & Frieler, K. (2004). Cognitive Adequacy in the Measurement
+        [2] W. Steinbeck, Struktur und Ähnlichkeit: Methoden automatisierter Melodieanalyse. Bärenreiter, 1982.
+        [3] Müllensiefen, D. & Frieler, K. (2006). Cognitive Adequacy in the Measurement
         of Melodic Similarity: Algorithmic vs. Human Judgments
         """
         if len(times) != len(pitches):

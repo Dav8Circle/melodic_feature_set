@@ -375,13 +375,14 @@ def extract_key_signatures_from_midi(midi_path: str) -> dict:
     Returns
     -------
     dict
-        Dictionary containing:
-        - 'first_key_signature': tuple of (key_name, mode) for first key signature,
-          where mode is 'major' or 'minor'
-        - 'all_key_signatures': list of (key_name, mode) for all key signatures
-        - 'has_key_signature': bool indicating if any key signature was found
-        - 'fifths': int representing position on circle of fifths (-7 to 7)
-        - 'mode': int (1 for major, -1 for minor)
+        Dictionary with these keys:
+
+        * ``first_key_signature``: tuple of ``(key_name, mode)`` for the first
+          key signature, where mode is ``'major'`` or ``'minor'``
+        * ``all_key_signatures``: list of ``(key_name, mode)`` for all key signatures
+        * ``has_key_signature``: bool indicating if any key signature was found
+        * ``fifths``: int representing position on circle of fifths (-7 to 7)
+        * ``mode``: int (1 for major, -1 for minor)
         
     Notes
     -----

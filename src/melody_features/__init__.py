@@ -6,6 +6,7 @@ from .corpus import (
     essen_corpus,  # noqa: F401
     pearce_default_idyom,  # noqa: F401
     get_corpus_path,
+    get_corpus_files,
     list_available_corpora,
     load_melodies_from_directory,
 )
@@ -49,6 +50,7 @@ __all__ = [
     "essen_corpus",
     "pearce_default_idyom",
     "get_corpus_path",
+    "get_corpus_files",
     "list_available_corpora",
     "Config",
     "FantasticConfig",

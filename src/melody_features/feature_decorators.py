@@ -125,7 +125,7 @@ jsymbolic = _create_feature_decorator(
 
 simile = _create_feature_decorator(
     FeatureSource.SIMILE,
-    "Müllensiefen, D., & Frieler, K. (2004). The Simile algorithms documentation 0.3"
+    "Müllensiefen, D., & Frieler, K. (2006). The Simile algorithms documentation 0.3"
 )
 
 novel = _create_feature_decorator(

@@ -62,12 +62,9 @@ class StepContour:
         ----------
         [1] Müllensiefen, D. (2009). Fantastic: Feature ANalysis Technology Accessing
         STatistics (In a Corpus): Technical Report v1.5
-        [2] W. Steinbeck, Struktur und Ähnlichkeit: Methoden automatisierter
-            Melodieanalyse. Bärenreiter, 1982.
-        [3] Juhász, Z. 2000. A model of variation in the music of a Hungarian ethnic
-            group. Journal of New Music Research 29(2):159-172.
-        [4] Eerola, T. & Toiviainen, P. (2004). MIDI Toolbox: MATLAB Tools for Music
-            Research. University of Jyväskylä: Kopijyvä, Jyväskylä, Finland.
+        [2] W. Steinbeck, Struktur und Ähnlichkeit: Methoden automatisierter Melodieanalyse. Bärenreiter, 1982.
+        [3] Juhász, Z. 2000. A model of variation in the music of a Hungarian ethnic group. Journal of New Music Research 29(2):159-172.
+        [4] Eerola, T. & Toiviainen, P. (2004). MIDI Toolbox: MATLAB Tools for Music Research. University of Jyväskylä: Kopijyvä, Jyväskylä, Finland.
 
         Examples
         --------

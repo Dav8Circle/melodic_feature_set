@@ -1,0 +1,113 @@
+/* Read the Docs theme: use the available window width */
+
+.wy-nav-content {
+  max-width: none;
+}
+
+.wy-nav-content-wrap {
+  background: #fcfcfc;
+}
+
+/* Homepage: 128px mark beside the title */
+#melody-features {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  column-gap: 1rem;
+  row-gap: 0.35rem;
+}
+
+#melody-features > h1 {
+  order: 2;
+  margin: 0;
+  flex: 0 1 auto;
+}
+
+/* Brand name italics in the docs chrome (html + dirhtml home links) */
+.wy-side-nav-search > a,
+.wy-nav-top > a,
+.wy-breadcrumbs li.breadcrumb-item a[href="index.html"],
+.wy-breadcrumbs li.breadcrumb-item a[href="../index.html"],
+.wy-breadcrumbs li.breadcrumb-item a[href="./"],
+.wy-breadcrumbs li.breadcrumb-item a[href="../"],
+.wy-breadcrumbs li.breadcrumb-item.active {
+  font-style: italic;
+}
+
+#melody-features > img.mf-home-logo {
+  order: 1;
+  flex: 0 0 auto;
+  margin: 0;
+}
+
+#melody-features > :not(h1):not(img.mf-home-logo):not(.admonition) {
+  order: 3;
+  flex: 1 1 100%;
+}
+
+#melody-features > .admonition {
+  order: 3;
+  flex: 0 0 auto;
+  display: inline-block;
+  width: fit-content;
+  max-width: 100%;
+}
+
+.mf-home-logo {
+  display: block;
+  width: 128px;
+  height: 128px;
+  border-radius: 12px;
+  pointer-events: none;
+}
+
+/*
+ * RTD styles `.property` as inline-block for the "property" keyword in
+ * signatures, but the selector also matches nested `dl.py.property`,
+ * which tiles Melody (and other) properties across the page.
+ */
+.rst-content dl.py.property {
+  display: block !important;
+  width: 100% !important;
+  float: none !important;
+  clear: both !important;
+}
+
+/*
+ * Keep [source] / headerlink from floating and stretching the blue
+ * signature bar (RTD already shrink-wraps dt with display: table).
+ */
+.rst-content dl.py > dt .viewcode-link,
+.rst-content dl.py > dt .headerlink {
+  float: none !important;
+  display: inline !important;
+  margin-left: 0.55em;
+}
+
+/* Notes/admonitions hug their text */
+.rst-content .admonition,
+.rst-content dl.py > dd .admonition {
+  display: block;
+  width: fit-content;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+/* Feature catalogue */
+.feature-catalogue {
+  margin-top: 1rem;
+}
+
+.feature-catalogue .search-input,
+.feature-catalogue .category-filter {
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+
+.feature-catalogue .table-container {
+  overflow-x: auto;
+}
+
+.feature-catalogue code {
+  white-space: normal;
+}
