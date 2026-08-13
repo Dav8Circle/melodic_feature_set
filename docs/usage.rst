@@ -237,10 +237,11 @@ Signature (simplified):
        skip_idyom: bool = False,
        long_format: bool = False,
        join_metadata: bool = True,
-   ) -> pandas.DataFrame
+   ) -> pandas.DataFrame | None
 
-**Returns:** a :class:`pandas.DataFrame`. If no valid melodies load, or no
-features are extracted, the result is an empty DataFrame (not ``None``).
+**Returns:** a :class:`pandas.DataFrame`, or ``None`` if no valid melodies
+load. If melodies load but nothing is extracted, the result is an empty
+DataFrame.
 
 Accepted ``input`` forms:
 
