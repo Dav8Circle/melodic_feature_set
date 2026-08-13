@@ -661,7 +661,7 @@ def main():
             f.write("- **MIDI Toolbox**: Eerola, T., & Toiviainen, P. (2004). MIDI Toolbox: MATLAB Tools for Music Research\n")
             f.write("- **MUST**: Clemente, A., Vila-Vidal, M., Pearce, M. T., et al. (2020). A Set of 200 Musical Stimuli Varying in Balance, Contour, Symmetry, and Complexity\n")
             f.write("- **Melsim**: Silas, S., & Frieler, K. (n.d.). Melsim: Framework for calculating tons of melodic similarities\n")
-            f.write("- **Simile**: Müllensiefen, D., & Frieler, K. (2004). The Simile algorithms documentation 0.3\n")
+            f.write("- **Simile**: Müllensiefen, D., & Frieler, K. (2006). The Simile algorithms documentation 0.3\n")
             f.write("- **Novel**: Custom features introduced in this package\n\n")
             f.write("## Feature Types\n\n")
             f.write("- **Descriptor**: Returns a single scalar value (int, float, bool)\n")

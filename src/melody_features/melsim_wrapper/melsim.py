@@ -7,7 +7,7 @@ Melsim is a package for computing similarity between melodies, and is being deve
 Sebastian Silas (https://sebsilas.com/) and Klaus Frieler
 (https://www.aesthetics.mpg.de/en/the-institute/people/klaus-frieler.html).
 
-Melsim is based on SIMILE, which was written by Daniel Müllensiefen and Klaus Frieler in 2004.
+Melsim is based on SIMILE, which was written by Daniel Müllensiefen and Klaus Frieler in 2006.
 This package is used to compare two or more melodies pairwise across a range of similarity measures.
 Not all similarity measures are implemented in melsim, but the ones that are can be used here.
 

@@ -16,7 +16,7 @@ Sources
 * **MIDI Toolbox**: Eerola, T., & Toiviainen, P. (2004). MIDI Toolbox: MATLAB Tools for Music Research
 * **MUST**: Clemente, A., Vila-Vidal, M., Pearce, M. T., et al. (2020). A Set of 200 Musical Stimuli Varying in Balance, Contour, Symmetry, and Complexity
 * **Melsim**: Silas, S., & Frieler, K. (n.d.). Melsim: Framework for calculating tons of melodic similarities
-* **SIMILE**: Müllensiefen, D., & Frieler, K. (2004). The Simile algorithms documentation 0.3
+* **SIMILE**: Müllensiefen, D., & Frieler, K. (2006). The Simile algorithms documentation 0.3
 * **Partitura**: Cancino-Chacón, C. (2022). Partitura
 * **Novel**: Custom features introduced in this package
 

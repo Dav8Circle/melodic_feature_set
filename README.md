@@ -19,7 +19,7 @@ This package is strictly for monophonic melodies - it will not compute any featu
 Included in the package are contributions from:
 
 - **FANTASTIC** (Müllensiefen, 2009)
-- **SIMILE** (Müllensiefen & Frieler, 2004)
+- **SIMILE** (Müllensiefen & Frieler, 2006)
 - **melsim** (Silas & Frieler, n.d.)
 - **jSymbolic2** (McKay & Fujinaga, 2006)
 - **IDyOM** (Pearce, 2005)

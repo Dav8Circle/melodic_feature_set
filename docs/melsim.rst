@@ -3,7 +3,7 @@ Melsim
 
 `Melsim <https://github.com/sebsilas/melsim>`_ is an R package for pairwise
 melodic similarity (Silas & Frieler), building on SIMILE (Müllensiefen &
-Frieler, 2004). *melody-features* wraps it so you can call melsim from
+Frieler, 2006). *melody-features* wraps it so you can call melsim from
 Python on MIDI files (or, via a legacy helper, on note arrays).
 
 Important notes
