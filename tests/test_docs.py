@@ -159,10 +159,10 @@ def test_interactive_catalogue_html_builds():
 def test_sphinx_docs_build(tmp_path):
     from sphinx.cmd.build import build_main
 
-    out_dir = tmp_path / "html"
-    status = build_main(["-b", "html", "-q", str(DOCS_DIR), str(out_dir)])
+    out_dir = tmp_path / "dirhtml"
+    status = build_main(["-b", "dirhtml", "-q", str(DOCS_DIR), str(out_dir)])
     assert status == 0, "sphinx-build failed"
     assert (out_dir / "index.html").is_file()
-    assert (out_dir / "feature_catalogue.html").is_file()
-    assert (out_dir / "usage.html").is_file()
-    assert (out_dir / "api" / "melsim.html").is_file()
+    assert (out_dir / "feature_catalogue" / "index.html").is_file()
+    assert (out_dir / "usage" / "index.html").is_file()
+    assert (out_dir / "api" / "melsim" / "index.html").is_file()

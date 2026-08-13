@@ -33,7 +33,7 @@ Included in the package are contributions from:
 
 This package provides over **200 features** from various computational melody analysis frameworks. For installation, usage, API reference, and a comprehensive interactive feature table with search and sorting, see the documentation:
 
-**[Documentation](https://dmwhyatt.github.io/melody-features/)** (feature catalogue: [Feature catalogue](https://dmwhyatt.github.io/melody-features/feature_catalogue.html))
+**[Documentation](https://dmwhyatt.github.io/melody-features/)** (feature catalogue: [Feature catalogue](https://dmwhyatt.github.io/melody-features/feature_catalogue/))
 
 The interactive catalogue allows you to:
 
@@ -151,8 +151,8 @@ By default, the 903-melody corpus is used as the reference corpus by `get_all_fe
 
 ```bash
 pip install -r docs/requirements.txt
-cd docs && make html
-# open docs/_build/html/index.html
+cd docs && make dirhtml
+# open docs/_build/dirhtml/index.html
 ```
 
 ### Running Tests

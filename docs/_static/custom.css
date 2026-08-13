@@ -23,10 +23,13 @@
   flex: 0 1 auto;
 }
 
-/* Brand name italics in the docs chrome */
+/* Brand name italics in the docs chrome (html + dirhtml home links) */
 .wy-side-nav-search > a,
 .wy-nav-top > a,
 .wy-breadcrumbs li.breadcrumb-item a[href="index.html"],
+.wy-breadcrumbs li.breadcrumb-item a[href="../index.html"],
+.wy-breadcrumbs li.breadcrumb-item a[href="./"],
+.wy-breadcrumbs li.breadcrumb-item a[href="../"],
 .wy-breadcrumbs li.breadcrumb-item.active {
   font-style: italic;
 }

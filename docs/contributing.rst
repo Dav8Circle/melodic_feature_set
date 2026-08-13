@@ -101,4 +101,4 @@ Sphinx site locally as well:
 .. code-block:: bash
 
    pip install -r docs/requirements.txt
-   cd docs && make html   # open _build/html/index.html
+   cd docs && make dirhtml   # open _build/dirhtml/index.html
