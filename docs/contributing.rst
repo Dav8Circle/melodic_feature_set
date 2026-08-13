@@ -8,8 +8,8 @@ Adding a new feature
 --------------------
 
 Features live in ``src/melody_features/feature_definitions/``.
-:func:`~melody_features.get_all_features` discovers decorated callables
-imported into :mod:`melody_features.features` — it does not use a hard-coded
+``get_all_features()`` discovers decorated callables
+imported into ``melody_features.features`` — it does not use a hard-coded
 list. Without correct decoration and export, a feature will not appear in
 ``get_all_features``, ``list_available_features``, or the catalogue.
 
@@ -24,7 +24,7 @@ list. Without correct decoration and export, a feature will not appear in
 Feature decorators
 ------------------
 
-Defined in :mod:`melody_features.feature_decorators`. Stack one or more
+Defined in ``melody_features.feature_decorators``. Stack one or more
 sources, one type, and one domain:
 
 .. code-block:: python
