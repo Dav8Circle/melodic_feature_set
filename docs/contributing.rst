@@ -85,11 +85,20 @@ the feature comes from a published method; use ``@novel`` for originals.
 Tests and docs builds
 ---------------------
 
+Every pull request should include tests for the change (new coverage or
+updates to existing tests). CI runs the suite on each PR; please run it
+locally first:
+
 .. code-block:: bash
 
    pytest
    # smoke-check discovery after adding a feature:
    python -c "import melody_features as mf; assert 'your_feature' in mf.list_available_features()"
+
+If you touch docs or docstrings that feed the API / catalogue, build the
+Sphinx site locally as well:
+
+.. code-block:: bash
 
    pip install -r docs/requirements.txt
    cd docs && make html   # open _build/html/index.html

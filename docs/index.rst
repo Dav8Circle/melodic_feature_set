@@ -23,6 +23,9 @@ Start here
 * :doc:`quickstart` — extract features in a few lines
 * :doc:`feature_catalogue` — searchable catalogue of every feature
 * :doc:`api/index` — API reference
+* `GitHub repository <https://github.com/dmwhyatt/melody-features>`_ —
+  source, issues, and pull requests
+* `PyPI <https://pypi.org/project/melody-features/>`_ — installable package
 
 Contents
 --------
