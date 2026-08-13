@@ -15,4 +15,6 @@ Public package surface, feature definitions, and supporting modules.
    reshape
    feature_metadata
    core
+   contour
+   idyom
    melsim

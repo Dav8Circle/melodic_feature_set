@@ -538,6 +538,156 @@ Skipping IDyOM (often useful locally)
 
    results = mf.get_all_features("path/to/midi", skip_idyom=True)
 
+Default IDyOM jobs and standalone ``run_idyom`` are documented in :doc:`idyom`.
+Install/verify steps: :ref:`install-idyom`.
+
+.. _key-estimation:
+
+Key estimation
+--------------
+
+:class:`~melody_features.Config` ``key_estimation`` controls how tonal context
+is obtained for tonality features, pitch spelling, and temporary MIDI written
+for IDyOM:
+
+* ``"infer_if_necessary"`` (default) — use a key signature from the MIDI file
+  when present; otherwise infer with the key-finding algorithm
+* ``"always_read_from_file"`` — require key metadata in the file; do not infer
+* ``"always_infer"`` — ignore file keys and always infer from note content
+
+``key_finding_algorithm`` is currently ``"krumhansl_schmuckler"`` only.
+
+.. code-block:: python
+
+   import melody_features as mf
+
+   config = mf.Config(
+       corpus=mf.get_corpus_path("pearce_default_idyom"),
+       fantastic=mf.FantasticConfig(max_ngram_order=5, phrase_gap=1.5),
+       idyom={
+           "pitch_stm": mf.IDyOMConfig(
+               target_viewpoints=["cpitch"],
+               source_viewpoints=[("cpitch", "cpint", "cpintfref")],
+               ppm_order=2,
+               models=":stm",
+           ),
+       },
+       key_estimation="always_infer",
+   )
+   results = mf.get_all_features("path/to/midi", config=config, skip_idyom=True)
+
+
+Selective feature extraction
+----------------------------
+
+For a single :class:`~melody_features.core.representations.Melody`, scoped helpers return
+a ``dict`` of feature name → value without running the full batch pipeline.
+They live on :mod:`melody_features.features` (also imported where re-exported).
+
+**By source** (toolkit provenance):
+
+.. code-block:: python
+
+   from melody_features.features import (
+       get_jsymbolic_features,
+       get_fantastic_features,
+       get_must_features,
+       get_midi_toolbox_features,
+       get_simile_features,
+       get_novel_features,
+   )
+   from melody_features.io.midi import load_midi
+
+   melody = load_midi("example.mid")
+   jsym = get_jsymbolic_features(melody)
+   must = get_must_features(melody)
+
+``get_fantastic_features`` accepts optional ``corpus_stats``, ``phrase_gap``,
+and ``max_ngram_order``. Precompute stats with
+:func:`~melody_features.corpus.make_corpus_stats` (see :doc:`corpora`).
+``get_idyom_features`` only collects functions tagged ``@idyom`` that can run
+from the melody alone — full IDyOM IC columns still come from
+``get_all_features`` / :doc:`idyom`.
+
+**By family / domain** (examples):
+
+.. code-block:: python
+
+   from melody_features.features import (
+       get_pitch_features,
+       get_pitch_class_features,
+       get_interval_features,
+       get_timing_features,
+       get_inter_onset_interval_features,
+       get_rhythm_features,
+       get_metre_features,
+       get_expectation_features,
+       get_complexity_features,
+       get_contour_features,
+       get_tonality_features,
+       get_lexical_diversity_features,
+       get_corpus_features,
+   )
+
+   pitch = get_pitch_features(melody)
+   timing = get_timing_features(melody)
+   # get_corpus_features(melody, corpus_stats, phrase_gap, max_ngram_order)
+
+For most corpus-scale jobs prefer ``mf.get_all_features``. Contour *class*
+APIs (full vectors): :doc:`contour`.
+
+
+JSON melodies
+-------------
+
+Besides MIDI, you can load a directory that contains a **single** JSON file
+holding a list of melody records via
+:func:`~melody_features.load_melodies_from_directory`:
+
+.. code-block:: python
+
+   import melody_features as mf
+
+   melodies = mf.load_melodies_from_directory(
+       "/path/to/dir_with_one_json",
+       file_type="json",
+   )
+   results = mf.get_all_features(melodies, skip_idyom=True)
+
+Each element should be a dict with aligned ``pitches``, ``starts``, and
+``ends`` lists (optional ``tempo``, ``tempo_changes``, ``ID`` / id fields).
+Legacy records with a ``MIDI Sequence`` note string are also accepted.
+:func:`~melody_features.core.representations.read_midijson` loads the raw JSON;
+:meth:`~melody_features.core.representations.Melody.from_notes` builds a melody without a
+file.
+
+
+Tokenization and n-grams
+------------------------
+
+FANTASTIC-style lexical and corpus features segment melodies with
+:class:`~melody_features.melody_tokenizer.FantasticTokenizer` (phrase gap in
+quarter notes) and count m-type n-grams with
+:class:`~melody_features.ngram_counter.NGramCounter`. MUST uses
+:class:`~melody_features.melody_tokenizer.MustTokenizer`.
+
+These are used inside the feature pipeline; you can also inspect them
+directly:
+
+.. code-block:: python
+
+   from melody_features.melody_tokenizer import FantasticTokenizer
+   from melody_features.io.midi import load_midi
+
+   melody = load_midi("example.mid")
+   tok = FantasticTokenizer()
+   phrases = tok.segment_melody(melody, phrase_gap=1.5, units="quarters")
+   tokens = tok.tokenize_melody(melody.pitches, melody.starts, melody.ends)
+   counts = tok.ngram_counts()
+
+Phrase gap and max n-gram order for batch runs are set on
+:class:`~melody_features.FantasticConfig` (see Configuration above).
+
 
 Feature families and types
 --------------------------
@@ -550,15 +700,6 @@ Return *kinds* (see the ``type`` column in long format / the catalogue):
 
 * **Descriptor** — scalar (``int``, ``float``, ``bool``)
 * **Sequence** — collection (``list``, ``tuple``, ``dict``, …)
-
-Source-specific aggregators such as ``get_jsymbolic_features(melody)`` also
-exist on :mod:`melody_features.features`; they return ``dict`` mappings of
-feature name → value for a single :class:`~melody_features.core.representations.Melody`.
-For most analysis jobs prefer :func:`~melody_features.get_all_features`.
-
-
-Putting it together
--------------------
 
 End-to-end pattern for a small custom run:
 

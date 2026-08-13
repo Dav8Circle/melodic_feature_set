@@ -69,8 +69,7 @@ class InterpolationContour:
         ----------
         [1] Müllensiefen, D. (2009). Fantastic: Feature ANalysis Technology Accessing
         STatistics (In a Corpus): Technical Report v1.5
-        [2] W. Steinbeck, Struktur und Ähnlichkeit: Methoden automatisierter
-            Melodieanalyse. Bärenreiter, 1982.
+        [2] W. Steinbeck, Struktur und Ähnlichkeit: Methoden automatisierter Melodieanalyse. Bärenreiter, 1982.
         [3] Müllensiefen, D. & Frieler, K. (2004). Cognitive Adequacy in the Measurement
         of Melodic Similarity: Algorithmic vs. Human Judgments
         """

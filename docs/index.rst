@@ -19,7 +19,7 @@ FANTASTIC, SIMILE, melsim, jSymbolic2, IDyOM, MIDI Toolbox, MUST, and Partitura.
 Start here
 ----------
 
-* :doc:`installation` — install from PyPI or from source
+* :doc:`installation` — install from PyPI or from source (including IDyOM)
 * :doc:`quickstart` — extract features in a few lines
 * :doc:`feature_catalogue` — searchable catalogue of every feature
 * :doc:`api/index` — API reference
@@ -36,7 +36,9 @@ Contents
    usage
    feature_catalogue
    corpora
+   idyom
    melsim
+   contour
    contributing
    license
 

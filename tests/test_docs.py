@@ -24,12 +24,16 @@ REQUIRED_GUIDE_PAGES = (
     "usage.rst",
     "feature_catalogue.rst",
     "corpora.rst",
+    "idyom.rst",
     "melsim.rst",
+    "contour.rst",
     "contributing.rst",
     "license.rst",
     "api/index.rst",
     "api/melsim.rst",
     "api/melody_features.rst",
+    "api/contour.rst",
+    "api/idyom.rst",
 )
 
 FEATURE_DEFINITION_MODULES = sorted(
