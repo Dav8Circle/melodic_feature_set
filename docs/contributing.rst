@@ -2,19 +2,19 @@ Contributing
 ============
 
 Fork the repository, implement your change, and open a pull request.
-Related features may share one PR; otherwise prefer **one feature per PR**.
+Related features may share one PR; otherwise prefer one feature per PR.
 
 Adding a new feature
 --------------------
 
 Features live in ``src/melody_features/feature_definitions/``.
-:func:`~melody_features.get_all_features` **discovers** decorated callables
+:func:`~melody_features.get_all_features` discovers decorated callables
 imported into :mod:`melody_features.features` — it does not use a hard-coded
 list. Without correct decoration and export, a feature will not appear in
 ``get_all_features``, ``list_available_features``, or the catalogue.
 
 1. Implement in the right ``feature_definitions/<family>.py`` module.
-2. Decorate with **source(s)**, **type**, and **domain** (below).
+2. Decorate with source(s), **type**, and **domain** (below).
 3. Add to that module’s ``__all__`` and import it in ``features.py``.
 4. Write a NumPy-style docstring and type hints (docs are built from these).
 5. Add tests; validate against the upstream implementation when possible
@@ -24,8 +24,8 @@ list. Without correct decoration and export, a feature will not appear in
 Feature decorators
 ------------------
 
-Defined in :mod:`melody_features.feature_decorators`. Stack **one or more
-sources**, **one type**, and **one domain**:
+Defined in :mod:`melody_features.feature_decorators`. Stack one or more
+sources, one type, and one domain:
 
 .. code-block:: python
 

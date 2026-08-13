@@ -1,4 +1,4 @@
-inter_onset_interval
+Inter-onset interval
 ====================
 
 Full module path: ``melody_features.feature_definitions.inter_onset_interval``.

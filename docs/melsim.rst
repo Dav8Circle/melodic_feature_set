@@ -3,18 +3,18 @@ Melsim
 
 `Melsim <https://github.com/sebsilas/melsim>`_ is an R package for pairwise
 melodic similarity (Silas & Frieler), building on SIMILE (Müllensiefen &
-Frieler, 2003/2004). *melody-features* wraps it so you can call melsim from
+Frieler, 2004). *melody-features* wraps it so you can call melsim from
 Python on MIDI files (or, via a legacy helper, on note arrays).
 
 Important notes
 ---------------
 
-* Melsim is **not** part of :func:`~melody_features.get_all_features`. Similarity
+* Melsim is not part of :func:`~melody_features.get_all_features`. Similarity
   is modular: you choose which melodies, measures, and transformations to
   compare.
-* You need a working **R** install, plus the melsim R package and its
+* You need a working R install, plus the melsim R package and its
   dependencies (the wrapper can install those for you).
-* Measure and transformation names are **case-sensitive**.
+* Measure and transformation names are case-sensitive.
 
 Requirements and setup
 ----------------------
@@ -45,13 +45,13 @@ Prefer :func:`~melody_features.melsim_wrapper.melsim.get_similarity_from_midi`.
 It reads MIDI through melsim’s own reader and returns either a single score
 or a dictionary of pairwise scores.
 
-**Inputs for** ``midi_path1``:
+Inputs for ``midi_path1``:
 
 * one MIDI path (then ``midi_path2`` is required)
 * a directory of ``.mid`` / ``.midi`` files → all pairwise comparisons
 * a list of MIDI paths → all pairwise comparisons
 
-**Useful parameters:**
+Useful parameters:
 
 * ``method`` — string or list of measure names (default ``"opti3"``)
 * ``transformation`` — string or list; domain to compare (e.g. ``"pitch"``,

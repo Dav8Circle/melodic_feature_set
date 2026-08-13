@@ -34,6 +34,7 @@ REQUIRED_GUIDE_PAGES = (
     "api/melody_features.rst",
     "api/contour.rst",
     "api/idyom.rst",
+    "api/tokenizer.rst",
 )
 
 FEATURE_DEFINITION_MODULES = sorted(

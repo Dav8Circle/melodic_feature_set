@@ -24,7 +24,7 @@ Pearce (2018) reference corpus
 ------------------------------
 
 903 Western traditional melodies used by Pearce for IDyOM pretraining
-(Pearce, 2018). This is the **default** reference corpus for
+(Pearce, 2018). This is the default reference corpus for
 :func:`~melody_features.get_all_features`.
 
 .. code-block:: python
@@ -38,8 +38,8 @@ Custom reference corpora
 ------------------------
 
 The bundled corpora are optional. For FANTASTIC corpus statistics and IDyOM
-long-term-model pretraining you can point *melody-features* at **any directory
-of monophonic MIDI files**.
+long-term-model pretraining you can point *melody-features* at any directory
+of monophonic MIDI files.
 
 Set :class:`~melody_features.Config` ``corpus`` to that directory. Optionally
 override just one subsystem with ``FantasticConfig.corpus`` or
@@ -70,14 +70,17 @@ pretraining corpus).
    results = mf.get_all_features("/path/to/melodies_to_analyse", config=config)
 
 FANTASTIC corpus statistics follow the n-gram document-frequency model in
-Müllensiefen (2009). IDyOM can pretrain on the same path or a separate
+Müllensiefen (2009). That is step 4 of the FANTASTIC pipeline (tokenize →
+count → compare to reference frequencies); see :ref:`fantastic-workflow` in
+:doc:`usage`. IDyOM can pretrain on the same path or a separate
 ``IDyOMConfig.corpus``.
 
 Precomputing FANTASTIC corpus statistics
 ----------------------------------------
 
 ``get_all_features`` builds corpus n-gram statistics from ``Config.corpus``
-when needed. For large corpora or repeated runs, precompute once and reuse:
+when needed. For large corpora or repeated runs, precompute once and reuse
+(same ``phrase_gap`` / ``n_range`` as your ``FantasticConfig``):
 
 .. code-block:: python
 

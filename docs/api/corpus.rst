@@ -1,5 +1,5 @@
-melody_features.corpus
-======================
+Corpus
+======
 
 Corpus paths, loading helpers, and FANTASTIC-style corpus statistics.
 

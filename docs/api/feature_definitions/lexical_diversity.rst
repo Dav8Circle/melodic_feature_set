@@ -1,4 +1,4 @@
-lexical_diversity
+Lexical diversity
 =================
 
 Full module path: ``melody_features.feature_definitions.lexical_diversity``.

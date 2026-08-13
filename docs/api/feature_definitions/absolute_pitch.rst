@@ -1,4 +1,4 @@
-absolute_pitch
+Absolute pitch
 ==============
 
 Full module path: ``melody_features.feature_definitions.absolute_pitch``.

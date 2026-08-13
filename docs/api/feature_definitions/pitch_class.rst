@@ -1,4 +1,4 @@
-pitch_class
+Pitch class
 ===========
 
 Full module path: ``melody_features.feature_definitions.pitch_class``.

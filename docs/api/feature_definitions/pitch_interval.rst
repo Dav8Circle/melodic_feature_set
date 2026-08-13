@@ -1,4 +1,4 @@
-pitch_interval
+Pitch interval
 ==============
 
 Full module path: ``melody_features.feature_definitions.pitch_interval``.

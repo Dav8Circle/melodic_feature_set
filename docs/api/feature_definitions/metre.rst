@@ -1,4 +1,4 @@
-metre
+Metre
 =====
 
 Full module path: ``melody_features.feature_definitions.metre``.

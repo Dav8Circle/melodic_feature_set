@@ -1,5 +1,5 @@
-melsim_wrapper
-==============
+Melsim
+======
 
 Python wrapper around the R package `melsim
 <https://github.com/sebsilas/melsim>`_. See the user guide :doc:`/melsim` for

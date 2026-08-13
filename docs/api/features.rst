@@ -1,5 +1,5 @@
-melody_features.features
-========================
+Feature Groups
+==============
 
 Feature aggregation helpers by domain and source. Prefer
 :func:`melody_features.get_all_features` for typical analysis jobs.

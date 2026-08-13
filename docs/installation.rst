@@ -10,9 +10,9 @@ Requirements
 
 Some optional capabilities have additional system requirements:
 
-* **IDyOM** features require SBCL (Steel Bank Common Lisp), Quicklisp, and the
+* IDyOM features require SBCL (Steel Bank Common Lisp), Quicklisp, and the
   IDyOM Lisp package (used via ``py2lispIDyOM``). See :ref:`install-idyom`.
-* **Melsim** similarity features require R and the melsim R package; they are
+* Melsim similarity features require R and the melsim R package; they are
   not part of ``get_all_features``. See :doc:`melsim`.
 
 Install from PyPI
@@ -60,7 +60,7 @@ Installing IDyOM
 ----------------
 
 By default ``get_all_features`` runs IDyOM. Install it once on the machine
-(Linux/macOS; on Windows use WSL), then verify from Python.
+(Linux/macOS), then verify from Python.
 
 What the installer sets up
 ~~~~~~~~~~~~~~~~~~~~~~~~~~

@@ -1,4 +1,4 @@
-contour
+Contour
 =======
 
 Full module path: ``melody_features.feature_definitions.contour``.

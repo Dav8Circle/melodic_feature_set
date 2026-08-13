@@ -1,5 +1,5 @@
-melody_features.pipeline
-========================
+Pipeline
+========
 
 Pipeline configuration and processing internals used by
 :func:`melody_features.get_all_features`.

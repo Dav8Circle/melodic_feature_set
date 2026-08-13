@@ -1,4 +1,4 @@
-idyom
+IDyOM
 =====
 
 IDyOM install helpers and standalone runner. User guide: :doc:`/idyom`.

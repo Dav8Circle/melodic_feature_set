@@ -1,5 +1,5 @@
-melody_features
-===============
+Package
+=======
 
 Primary public entry points. Individual feature callables are documented under
 :doc:`feature_definitions/index` (and summarised in the interactive
@@ -35,6 +35,8 @@ Corpora helpers
 ---------------
 
 .. autofunction:: melody_features.get_corpus_path
+
+.. autofunction:: melody_features.get_corpus_files
 
 .. autofunction:: melody_features.list_available_corpora
 

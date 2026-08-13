@@ -1,7 +1,7 @@
 Usage
 =====
 
-This guide documents the main workflows with **explicit return types**, so you
+This guide documents the main workflows with explicit return types, so you
 do not have to guess whether a helper returns a single object, a list, or
 ``None``.
 
@@ -36,7 +36,7 @@ Single MIDI file
 
    assert melody is None or isinstance(melody, Melody)
 
-:func:`~melody_features.io.midi.load_midi` always returns **one** object (or
+:func:`~melody_features.io.midi.load_midi` always returns one object (or
 ``None``). It never returns a list.
 
 Useful attributes on a successful load:
@@ -97,7 +97,7 @@ raw dictionary.
 Directory of MIDI files
 ~~~~~~~~~~~~~~~~~~~~~~~
 
-Two helpers load many files; both return a **list of** ``Melody`` objects:
+Two helpers load many files; both return a list of ``Melody`` objects:
 
 .. code-block:: python
 
@@ -113,10 +113,9 @@ Two helpers load many files; both return a **list of** ``Melody`` objects:
    # Returns: list[Melody]
    # Failed files are skipped (warnings logged); successful loads only.
 
-   # Corpus-oriented loader (JSON or MIDI directory)
+   # Corpus-oriented loader (MIDI directory; JSON is legacy — see below)
    melodies = mf.load_melodies_from_directory("path/to/dir", file_type="midi")
    # Returns: list[Melody]
-   # file_type: "midi" | "json"
 
 Constructing a Melody without a file
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -171,7 +170,7 @@ Calling individual features
 ---------------------------
 
 Atomic feature functions are imported from the package root (or
-``melody_features.features``). Their signatures take **note lists** (and
+``melody_features.features``). Their signatures take note lists (and
 sometimes tempo or related fields) rather than a ``Melody`` argument — but
 :class:`~melody_features.core.nxt.Melody` exposes exactly those lists as
 attributes, so everyday use is still a one-liner after loading:
@@ -240,7 +239,8 @@ Signature (simplified):
        join_metadata: bool = True,
    ) -> pandas.DataFrame
 
-**Returns:** a :class:`pandas.DataFrame` (empty if nothing could be processed).
+**Returns:** a :class:`pandas.DataFrame`. If no valid melodies load, or no
+features are extracted, the result is an empty DataFrame (not ``None``).
 
 Accepted ``input`` forms:
 
@@ -267,17 +267,17 @@ Wide vs long output
 -------------------
 
 The snippets below are trimmed excerpts from a real run on two Essen melodies
-(``skip_idyom=True``). A full wide table has on the order of **280** feature
+(``skip_idyom=True``). A full wide table has on the order of 280 feature
 columns; only a few are shown here.
 
 Wide format (default)
 ~~~~~~~~~~~~~~~~~~~~~
 
-* **Shape:** one row per melody
-* **ID columns:** ``melody_num``, ``melody_id``
-* **Feature columns:** ``{family}.{feature_name}``
+* Shape: one row per melody
+* ID columns: ``melody_num``, ``melody_id``
+* Feature columns: ``{family}.{feature_name}``
   (e.g. ``absolute_pitch.pitch_range``)
-* **Cell types:** scalars for descriptors; Python objects (lists/dicts) for
+* Cell types: scalars for descriptors; Python objects (lists/dicts) for
   sequence features
 
 .. code-block:: python
@@ -311,9 +311,9 @@ objects.
 Long format
 ~~~~~~~~~~~
 
-* **Shape:** one row per melody × feature
-* **Core columns:** ``melody_num``, ``melody_id``, ``feature_name``, ``value``
-* **With** ``join_metadata=True`` **(default):** also
+* Shape: one row per melody × feature
+* Core columns: ``melody_num``, ``melody_id``, ``feature_name``, ``value``
+* With ``join_metadata=True`` (default): also
   ``family``, ``source``, ``domain``, ``type``, ``description``, ``notes``,
   ``references``
 
@@ -377,7 +377,7 @@ call :func:`~melody_features.get_all_features`. Pass a ``Config`` to set:
   (by default) IDyOM long-term-model pretraining
 * **fantastic** — a :class:`~melody_features.FantasticConfig` (n-gram order,
   phrase gap, optional corpus override)
-* **idyom** — a **dictionary** of named :class:`~melody_features.IDyOMConfig`
+* **idyom** — a dictionary of named :class:`~melody_features.IDyOMConfig`
   objects (see below)
 * **key_estimation** / **key_finding_algorithm** — how tonal context is obtained
 
@@ -401,14 +401,14 @@ corpus-relative n-gram statistics (Müllensiefen, 2009). Its fields are:
   FANTASTIC's usual ``n.limits`` of 1–5). Raising it includes longer
   patterns; lowering it truncates them. Must be ``>= 1``.
 * **phrase_gap** (``float``, default ``1.5``) — inter-onset interval
-  threshold in **quarter-note** units. Within a melody, an IOI larger than
+  threshold in quarter-note units. Within a melody, an IOI larger than
   this value starts a new phrase for tokenization. Smaller values yield
   more / shorter phrases; larger values keep notes together longer. Must
   be ``> 0``.
 * **corpus** (optional path) — MIDI directory used to build the reference
   corpus statistics for distributional FANTASTIC features. If ``None``,
   the parent :class:`~melody_features.Config` corpus is used (bundled
-  Pearce set by default). This does **not** change IDyOM pretraining; use
+  Pearce set by default). This does not change IDyOM pretraining; use
   ``IDyOMConfig.corpus`` for that.
 
 .. code-block:: python
@@ -430,8 +430,8 @@ Each :class:`~melody_features.IDyOMConfig` takes:
   ``["onset"]``)
 * **source_viewpoints** — what conditions that prediction
 
-Build viewpoint lists from atomic names (strings) and optional **linked**
-viewpoints. A linked viewpoint is a **tuple** (Python parentheses) of two or
+Build viewpoint lists from atomic names (strings) and optional linked
+viewpoints. A linked viewpoint is a tuple (Python parentheses) of two or
 more atomic names; IDyOM treats that combination as one joint source. You can
 mix strings and tuples in the same list:
 
@@ -457,8 +457,8 @@ must contain at least two atoms; every atom is checked against that set.
 Multiple IDyOM runs
 ~~~~~~~~~~~~~~~~~~~
 
-``Config.idyom`` is a non-empty ``dict[str, IDyOMConfig]``. **Each entry is a
-separate IDyOM job.** The dict key is a label that appears in the output
+``Config.idyom`` is a non-empty ``dict[str, IDyOMConfig]``. Each entry is a
+separate IDyOM job. The dict key is a label that appears in the output
 column names for that run, so you can compare models, viewpoints, or corpora
 in one ``get_all_features`` call.
 
@@ -491,8 +491,12 @@ and a rhythm long-term model:
    )
 
    results = mf.get_all_features("path/to/midi", config=config)
-   # Wide columns include separate IDyOM feature sets labelled by the dict keys,
-   # e.g. features derived from the "pitch_stm" and "rhythm_ltm" runs.
+   # Wide columns are labelled by the dict keys, for example:
+   #   idyom.pitch_stm_mean_information_content
+   #   idyom.rhythm_ltm_mean_information_content
+
+Pattern: ``idyom.<config_key>_<metric>``. See :doc:`idyom` for the default
+four-run column names and how they relate to ``expectation.*`` helpers.
 
 You can add as many named ``IDyOMConfig`` entries as you need (different
 ``models``, viewpoints, ``ppm_order``, or pretraining ``corpus``). Per-entry
@@ -529,8 +533,8 @@ Minimal single-run example
 
    results = mf.get_all_features("path/to/midi", config=config)
 
-Skipping IDyOM (often useful locally)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Skipping IDyOM
+~~~~~~~~~~~~~~
 
 .. code-block:: python
 
@@ -584,7 +588,7 @@ For a single :class:`~melody_features.core.representations.Melody`, scoped helpe
 a ``dict`` of feature name → value without running the full batch pipeline.
 They live on :mod:`melody_features.features` (also imported where re-exported).
 
-**By source** (toolkit provenance):
+By source (toolkit provenance):
 
 .. code-block:: python
 
@@ -606,10 +610,10 @@ They live on :mod:`melody_features.features` (also imported where re-exported).
 and ``max_ngram_order``. Precompute stats with
 :func:`~melody_features.corpus.make_corpus_stats` (see :doc:`corpora`).
 ``get_idyom_features`` only collects functions tagged ``@idyom`` that can run
-from the melody alone — full IDyOM IC columns still come from
+from the melody alone — full IDyOM information-content columns still come from
 ``get_all_features`` / :doc:`idyom`.
 
-**By family / domain** (examples):
+By family / domain (examples):
 
 .. code-block:: python
 
@@ -633,60 +637,88 @@ from the melody alone — full IDyOM IC columns still come from
    timing = get_timing_features(melody)
    # get_corpus_features(melody, corpus_stats, phrase_gap, max_ngram_order)
 
-For most corpus-scale jobs prefer ``mf.get_all_features``. Contour *class*
+For most corpus-scale jobs prefer ``mf.get_all_features``. Contour class
 APIs (full vectors): :doc:`contour`.
 
 
-JSON melodies
--------------
+.. _fantastic-workflow:
 
-Besides MIDI, you can load a directory that contains a **single** JSON file
-holding a list of melody records via
-:func:`~melody_features.load_melodies_from_directory`:
+FANTASTIC workflow
+------------------
 
-.. code-block:: python
+FANTASTIC-style features (Müllensiefen, 2009) follow a fixed pipeline. Batch
+runs do this for you via :class:`~melody_features.FantasticConfig`; the steps
+below are what happens under the hood, and what you can call yourself.
 
-   import melody_features as mf
+1. **Phrase segmentation** — split the melody on large inter-onset gaps
+   (``phrase_gap`` in quarter notes).
+2. **M-type tokenization** — each step becomes an
+   :class:`~melody_features.melody_tokenizer.MType` (classified pitch interval
+   × classified IOI ratio). Default scheme is ``"FANTASTIC"``; ``"SIMILE"``
+   uses a coarser signed-interval map.
+3. **N-gram counting** — accumulate m-type n-grams of order ``1`` …
+   ``max_ngram_order`` with
+   :class:`~melody_features.ngram_counter.NGramCounter`.
+4. **Lexical / corpus features** — lexical-diversity (m-type) measures use
+   the melody’s own counts; distributional corpus features compare those
+   counts to reference document frequencies from ``Config.corpus`` (or a
+   precomputed stats file — see :doc:`corpora`).
 
-   melodies = mf.load_melodies_from_directory(
-       "/path/to/dir_with_one_json",
-       file_type="json",
-   )
-   results = mf.get_all_features(melodies, skip_idyom=True)
-
-Each element should be a dict with aligned ``pitches``, ``starts``, and
-``ends`` lists (optional ``tempo``, ``tempo_changes``, ``ID`` / id fields).
-Legacy records with a ``MIDI Sequence`` note string are also accepted.
-:func:`~melody_features.core.representations.read_midijson` loads the raw JSON;
-:meth:`~melody_features.core.representations.Melody.from_notes` builds a melody without a
-file.
-
-
-Tokenization and n-grams
-------------------------
-
-FANTASTIC-style lexical and corpus features segment melodies with
-:class:`~melody_features.melody_tokenizer.FantasticTokenizer` (phrase gap in
-quarter notes) and count m-type n-grams with
-:class:`~melody_features.ngram_counter.NGramCounter`. MUST uses
-:class:`~melody_features.melody_tokenizer.MustTokenizer`.
-
-These are used inside the feature pipeline; you can also inspect them
-directly:
+Inspect steps 1–3 directly:
 
 .. code-block:: python
 
    from melody_features.melody_tokenizer import FantasticTokenizer
+   from melody_features.ngram_counter import NGramCounter
    from melody_features.io.midi import load_midi
 
    melody = load_midi("example.mid")
-   tok = FantasticTokenizer()
+   tok = FantasticTokenizer()  # scheme="FANTASTIC" (or "SIMILE")
    phrases = tok.segment_melody(melody, phrase_gap=1.5, units="quarters")
    tokens = tok.tokenize_melody(melody.pitches, melody.starts, melody.ends)
-   counts = tok.ngram_counts()
+   counts = tok.ngram_counts()  # all orders counted during tokenize_melody
 
-Phrase gap and max n-gram order for batch runs are set on
-:class:`~melody_features.FantasticConfig` (see Configuration above).
+   # Or count with an explicit counter / max order:
+   counter = NGramCounter()
+   counter.count_ngrams(tokens, max_order=5)
+   bigrams = counter.get_counts(n=2)
+
+Selective helpers that consume the same knobs (and optional ``corpus_stats``):
+
+.. code-block:: python
+
+   from melody_features.features import (
+       get_fantastic_features,
+       get_lexical_diversity_features,
+       get_corpus_features,
+   )
+
+   # get_fantastic_features bundles lexical + corpus FANTASTIC outputs
+   # get_lexical_diversity_features(melody, phrase_gap=1.5, max_ngram_order=5)
+   # get_corpus_features(melody, corpus_stats, phrase_gap=1.5, max_ngram_order=5)
+
+Phrase gap and max n-gram order for ``get_all_features`` are set on
+:class:`~melody_features.FantasticConfig` (see Configuration above). API
+reference: :doc:`api/tokenizer`.
+
+
+MUST tokenization
+-----------------
+
+:class:`~melody_features.melody_tokenizer.MustTokenizer` builds pitch /
+interval / duration distributions used by MUST-derived complexity features.
+This is separate from the FANTASTIC m-type pipeline above.
+
+.. code-block:: python
+
+   from melody_features.melody_tokenizer import MustTokenizer
+   from melody_features.io.midi import load_midi
+
+   melody = load_midi("example.mid")
+   must = MustTokenizer()
+   pdist = must.pdist1(melody)          # MustDistribution
+   print(pdist.as_dict())
+   print(pdist.entropy())
 
 
 Feature families and types
@@ -696,10 +728,14 @@ Features are grouped into families such as absolute pitch, pitch class,
 pitch interval, contour, timing, inter-onset interval, tonality, metre,
 expectation, complexity, lexical diversity, and corpus statistics.
 
-Return *kinds* (see the ``type`` column in long format / the catalogue):
+Return kinds (see the ``type`` column in long format / the catalogue):
 
 * **Descriptor** — scalar (``int``, ``float``, ``bool``)
 * **Sequence** — collection (``list``, ``tuple``, ``dict``, …)
+
+
+Putting it together
+-------------------
 
 End-to-end pattern for a small custom run:
 
@@ -719,3 +755,14 @@ End-to-end pattern for a small custom run:
    wide = mf.get_all_features(files, skip_idyom=True)
    print(wide.shape)
    print(wide[["melody_id", "absolute_pitch.pitch_range"]].head())
+
+
+Legacy: JSON melody files
+-------------------------
+
+MIDI is the supported input. A legacy path still accepts a directory containing
+one JSON file (a list of melody dicts) via
+``load_melodies_from_directory(..., file_type="json")``. Each record needs
+aligned ``pitches``, ``starts``, and ``ends`` (or a legacy ``MIDI Sequence``
+string). Prefer MIDI or :meth:`~melody_features.core.representations.Melody.from_notes`
+for new work.

@@ -10,6 +10,7 @@ Public package surface, feature definitions, and supporting modules.
    feature_definitions/index
    features
    corpus
+   tokenizer
    io
    pipeline
    reshape

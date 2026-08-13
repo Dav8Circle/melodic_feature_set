@@ -1,5 +1,5 @@
-melody_features.reshape
-=======================
+Reshape
+=======
 
 Wide-to-long reshaping helpers.
 

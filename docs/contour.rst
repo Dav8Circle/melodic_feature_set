@@ -1,7 +1,7 @@
 Contour representations
 =======================
 
-Contour **features** in ``get_all_features`` come from
+Contour features in ``get_all_features`` come from
 :mod:`melody_features.feature_definitions.contour`. Under the hood they use
 classes in :mod:`melody_features.contour` that expose the full contour vectors
 and summary properties — useful when you want intermediates, not only
@@ -23,7 +23,7 @@ Classes
 Example: step contour
 ---------------------
 
-Durations are typically in **beats/tatums** (feature helpers derive them from
+Durations are typically in beats/tatums (feature helpers derive them from
 ``starts`` / ``ends`` / ``tempo``). Constructing the class directly:
 
 .. code-block:: python

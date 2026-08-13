@@ -1065,6 +1065,8 @@ def get_all_features(
         A pandas DataFrame with a row for every melody in the input, containing all extracted features.
         You can save this to CSV using df.to_csv('filename.csv') if needed.
         If `long_format=True`, one row per melody/feature combination instead.
+        If no valid melodies are loaded, or no features are extracted, an empty
+        DataFrame (no rows) is returned — never ``None``.
 
     """
     suppress_common_melody_warnings()
@@ -1109,7 +1111,7 @@ def get_all_features(
 
     if not melody_data_list:
         logger.warning("No valid monophonic melodies found to process.")
-        return
+        return pd.DataFrame()
 
     if skip_idyom:
         logger.info("Skipping IDyOM analysis...")

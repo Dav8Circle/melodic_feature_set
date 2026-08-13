@@ -1,4 +1,4 @@
-tonality
+Tonality
 ========
 
 Full module path: ``melody_features.feature_definitions.tonality``.

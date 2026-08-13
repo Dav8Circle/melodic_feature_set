@@ -1,4 +1,4 @@
-timing
+Timing
 ======
 
 Full module path: ``melody_features.feature_definitions.timing``.

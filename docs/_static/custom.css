@@ -59,19 +59,21 @@
 }
 
 /*
- * Shrink-wrap signature bars and notes to their own text.
- * RTD floats [source] right inside dt, which stretches the blue bar
- * across the content column — keep source inline instead.
+ * RTD styles `.property` as inline-block for the "property" keyword in
+ * signatures, but the selector also matches nested `dl.py.property`,
+ * which tiles Melody (and other) properties across the page.
  */
-.rst-content dl.py > dt.sig,
-.rst-content dl.py > dt {
-  display: inline-block !important;
-  width: fit-content !important;
-  max-width: 100%;
-  box-sizing: border-box;
-  vertical-align: top;
+.rst-content dl.py.property {
+  display: block !important;
+  width: 100% !important;
+  float: none !important;
+  clear: both !important;
 }
 
+/*
+ * Keep [source] / headerlink from floating and stretching the blue
+ * signature bar (RTD already shrink-wraps dt with display: table).
+ */
 .rst-content dl.py > dt .viewcode-link,
 .rst-content dl.py > dt .headerlink {
   float: none !important;
@@ -79,21 +81,13 @@
   margin-left: 0.55em;
 }
 
+/* Notes/admonitions hug their text */
+.rst-content .admonition,
 .rst-content dl.py > dd .admonition {
-  display: inline-block;
+  display: block;
   width: fit-content;
   max-width: 100%;
   box-sizing: border-box;
-  vertical-align: top;
-}
-
-/* General notes/admonitions also hug their text */
-.rst-content .admonition {
-  display: inline-block;
-  width: fit-content;
-  max-width: 100%;
-  box-sizing: border-box;
-  vertical-align: top;
 }
 
 /* Feature catalogue */

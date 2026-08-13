@@ -8,12 +8,12 @@
 *melody-features* consolidates a wide range of computational melody analysis
 features into a single Python package for monophonic melodies.
 
-This package provides over **200 features** drawn from frameworks including
+This package provides over 200 features drawn from frameworks including
 FANTASTIC, SIMILE, melsim, jSymbolic2, IDyOM, MIDI Toolbox, MUST, and Partitura.
 
 .. note::
 
-   This package is strictly for **monophonic** melodies. It will not compute
+   This package is strictly for monophonic melodies. It will not compute
    features for polyphonic music.
 
 Start here

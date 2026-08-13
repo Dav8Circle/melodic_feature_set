@@ -1,4 +1,4 @@
-contour
+Contour
 =======
 
 Contour representation classes used by contour features. User guide:
