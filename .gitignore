@@ -22,6 +22,7 @@ features_table.qmd
 features_table.html
 features_table_files/
 export_features_table.py
+*.dat
 
 # table generation helpers
 build.sh
