@@ -23,6 +23,8 @@ features_table.html
 features_table_files/
 export_features_table.py
 *.dat
+*.json
+*.csv
 
 # table generation helpers
 build.sh
